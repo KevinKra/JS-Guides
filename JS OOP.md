@@ -72,4 +72,35 @@ While we are able to (more rapidly) create copies of our object, there is still 
 **What if we there was a place we could hold the shared functionality...**
 
 Before we delve into this solution, let's discuss the two ways of passing values around in JavaScript. Passing by `reference` and passing by `value`.
-...
+
+```
+var a = 5;
+var b = a;
+a = 10;
+var a;
+var b;
+b += 15;
+```
+```
+var apple = [1,2,3]
+var toast = apple;
+apple.push(3);
+apple;
+toast;
+```
+The first example is passing by value, we are literally copying the data and assigning it to a new place in memory. Another way to think about it is: `var b` equals the value stored in `var a`, once that initial assignment is completed, the bond is broken. This method of passing values is limited to `primitives`.
+
+The second example pertains to complex data structures. Objects, and their respective subtypes of arrays and functions, all reference a specific place in memory. They essentially all point to the same location. When you declare a variable and assign it to an array (like above), the variable never truly *holds*  the value, but rather references it. When we assigned the value of `apple` to `toast` we were more accurately giving toast the same reference to the array in memory.
+
+To simplify the concept, image copying to be akin to `var a` being a person holding a pineapple, `var b` says I want to be exactly like `var a`, so I too am going to hold a pineapple. Link severed. `var a` now decides to hold a tomato. `var b` no longer cares about what `var a` is up to, so he simply keeps holding onto his pineapple. Passing value by reference is even more straightforward, everyone points to the basket of fruit, if it's changed everyone recognizes the modification.
+
+> these concepts are very important in regards to functional programming and data mutation. A topic for a future guide. Just remember, in the event you need to mutate a data structure copy it and transform the copy, not the original that everyone is referencing.
+
+
+
+
+
+
+
+
+
