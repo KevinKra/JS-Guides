@@ -13,9 +13,15 @@
  - `__proto__`
  - `prototype`
  - `constructor`
+ - `retroactive inheritance`
+ - `syntactic sugar`
+ - `prototype nature`
+ - `prototype chain`
  - `implicit variable`
+ - `subclassing`
+ - `Factory Function`
  - `this` and `this`
- -  `new`
+ - `new`
  - `OOLO` vs `OO`
 
  
@@ -94,6 +100,9 @@ The second example pertains to complex data structures. Objects, and their respe
 
 To simplify the concept, image copying to be akin to `var a` being a person holding a pineapple, `var b` says I want to be exactly like `var a`, so I too am going to hold a pineapple. Link severed. `var a` now decides to hold a tomato. `var b` no longer cares about what `var a` is up to, so he simply keeps holding onto his pineapple. Passing value by reference is even more straightforward, everyone points to the basket of fruit, if it's changed everyone recognizes the modification.
 
+*I used these two examples to illustrate different ways to think about how data gets passed around, we will see that the linkages made between objects are neither passing by value or reference, but conceptually it mirrors the design of passing by reference in the sense of n objects all pointing to the same place.*
+
+
 > these concepts are very important in regards to functional programming and data mutation. A topic for a future guide. Just remember, in the event you need to mutate a data structure copy it and transform the copy, not the original that everyone is referencing.
 
 **Ok, back to Objects**
@@ -132,6 +141,7 @@ We created an **object** with the identifier `userFunctions`, this **object** co
 > So how does it actually link to the object we provided as an argument??
 
 `__proto__`, aka "dunder proto" (double underscore proto). 
+>  alternate: `Object.getPrototypeOf()` since `__proto__` is a private variable and becoming phased out.
 
 `__proto__` is the link that connects our instantiated objects to a shared reference point in memory. In this case we used the Object method `.create()` with an argument object type. This object serves as the (in this case explicitly) as the storage location for our shared functions.
 >This is great. We have a way to rapidly create objects and dynamically assign their key (property) value pairs. Additionally, we also have a solution for our performance issue: we have a nice tidy object that can house all of our functionality and every instanced object can reference the same object. 
@@ -198,7 +208,7 @@ class Hobbit {
 
 let hobbit1 = new Hobbit('Greg', 99);
 ```
-If we peel back the layers of this Class onion, we would see that it actually is built exactly the same as the above prototypal approach seen earlier. For instance, if we `console.log(Hobbit.prototype)` we would find `isHungry` method actually living on that property object. Neat.
+If we peel back the layers of this Class onion, we would see that it actually is built exactly the same as the above prototype approach seen earlier. For instance, if we `console.log(Hobbit.prototype)` we would find `isHungry` method actually living on that property object. Neat.
 
 > So why introduce classes at all? The previous prototype approach was more explicit, this class system is deceptive and abstracts away a lot of what made the prototype approach helpful. The answer is that it copies the structure that is prevalent in a lot of other languages, many people learning Javascript after learning Java were frustrated with the JS implementation to object instantiation. So, they introduced something that *looks* like the traditional `OO` class construct, but we now know (hopefully) how it is fundamentally different.
 
