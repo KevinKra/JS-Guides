@@ -231,7 +231,7 @@ In the above example, `hasOwnProperty` method was found on the `Object`'s `proto
 
 By using subclassing we are able to create more specific classes that can utilize the functionality and data of previous classes while preventing the previous classes from accessing our more privileged functionality and data.
 
-lets look at the explicit example below.
+lets look at the explicit subclassing example below.
 ```
 //we create a normalUser factory function and __proto__ link it to the userFunctions Object.
 function normalUser(name, score) {
