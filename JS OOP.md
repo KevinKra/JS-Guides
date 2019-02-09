@@ -202,6 +202,58 @@ If we peel back the layers of this Class onion, we would see that it actually is
 
 > So why introduce classes at all? The previous prototype approach was more explicit, this class system is deceptive and abstracts away a lot of what made the prototype approach helpful. The answer is that it copies the structure that is prevalent in a lot of other languages, many people learning Javascript after learning Java were frustrated with the JS implementation to object instantiation. So, they introduced something that *looks* like the traditional `OO` class construct, but we now know (hopefully) how it is fundamentally different.
 
+**JS's `prototype nature` and `prototype chain`**
+```
+const a = {
+    name : 'steven'
+}
+
+a.name //steven
+a.hasOwnProperty('name') 
+```
+Javascript uses its prototype nature to look up the prototype chain and finds the `hasOwnProperty` method located on the built-in (or native) `Object` "function-object combo". *Capital O* `Object`, along with several other capital lettered function-objects, come with the language. When we are unable to find the relevant methods on our immediate object, Javascript follows the `__proto__` linkage until it eventually finds the relevant called method or property.   
+
+In the above example, `hasOwnProperty` method was found on the `Object`'s `prototype` object property.
+
+
+**Subclassing**
+>Ordering the distribution of our functions among our linked objects in a structured way 
+
+By using subclassing we are able to create more specific classes that can utilize the functionality and data of previous classes while preventing the previous classes from accessing our more privileged functionality and data.
+
+lets look at the explicit example below.
+```
+//we create a normalUser factory function and __proto__ link it to the userFunctions Object.
+function normalUser(name, score) {
+    const newUser = Object.create(userFunctions);
+    newUser.name = name;
+    newUser.score = score;
+    return newUser;
+}
+
+const userFunctions = {
+    logOut : function() {console.log("Beep boop logged out")}
+}
+
+//we then create a new factory function that creates more privledged objects than before.
+function paidUser(paidName, paidScore, accountBalance) {
+    const newUser = normalUser(paidName, paidScore);
+    Object.setPrototypeOf(newUser, paidUserFunctions);
+    newUser.accountBalance = accountBalance;
+    return newUser;
+} 
+
+const paidUserFunctions = {
+    increaseBalance : function() {
+        this.accountBalance += 500;
+    }
+}
+
+Object.setPrototypeOf(paidUserFunctions, userFunctions);
+
+let a = normalUser('Kevin', 250);
+let b = paidUser('Toby', 550, 2500);
+```
 
 
 
