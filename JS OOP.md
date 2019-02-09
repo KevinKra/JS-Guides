@@ -180,7 +180,27 @@ In traditional `OO` languages after we declared `hobbit1` and used the `new` con
 
 >Don't be fooled by the `class` implementation that ES6 introduced, while it's simpler and easier to reason about it is called `syntactic sugar` for a reason.
 
+**the Class construct**
 
+```
+class Hobbit {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+        this.hours = 0;
+        this.hungry = false;
+    }
+    isHungry() {
+        this.hours++;
+        this.hungry = (this.hours > 2);
+    }
+}
+
+let hobbit1 = new Hobbit('Greg', 99);
+```
+If we peel back the layers of this Class onion, we would see that it actually is built exactly the same as the above prototypal approach seen earlier. For instance, if we `console.log(Hobbit.prototype)` we would find `isHungry` method actually living on that property object. Neat.
+
+> So why introduce classes at all? The previous prototype approach was more explicit, this class system is deceptive and abstracts away a lot of what made the prototype approach helpful. The answer is that it copies the structure that is prevalent in a lot of other languages, many people learning Javascript after learning Java were frustrated with the JS implementation to object instantiation. So, they introduced something that *looks* like the traditional `OO` class construct, but we now know (hopefully) how it is fundamentally different.
 
 
 
