@@ -315,3 +315,52 @@ let myFridge = new normalFridge('Lenovo', 500);
 let myFancyFridge = new fancyFridge('iFridge', 5000);
 ```
 
+**ES6 (sugary) Class approach**
+> our base object
+
+```
+class Vampire {
+    constructor(name, age, thirsty = false) {
+        this.name = name;
+        this.age = age;
+        this.thirsty = thirsty;
+        this.human = true;
+        this.bat = false;
+    }
+    xform() {
+            this.human = !this.human;
+            this.bat = !this.bat;
+    }
+    toBat() {
+        return this.human ? this.xform() : `I'm already a bat!`;
+    }
+    toHuman() {
+        return !this.human ? this.xform() : `I'm already a human!`;
+    }
+}
+
+
+var person1 = new Vampire('Andre', 27);
+
+```
+
+```
+class SpecialVampire extends Vampire {
+    constructor(specialName, specialAge, glitter = false)   {
+        super(specialName, specialAge);
+        this.glitter = glitter;
+        this.alive = true;
+    }
+    directSunlight() {
+        if (this.alive) {
+            this.glitter = true;
+            this.alive = false;
+            console.log(`ah damn the sun ouch`);
+        } else {
+            console.log(`I'm not in direct sunlight`);
+        }
+    }
+}
+
+var person2 = new SpecialVampire('Edward', 187);
+```
