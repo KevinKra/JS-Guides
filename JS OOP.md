@@ -282,7 +282,10 @@ let a = normalUser('Kevin', 250);
 let b = paidUser('Toby', 550, 2500);
 ```
 
-Now let's repeat this process with the `new` keyword, it will require us to use binding rules to establish the original function object as the context object for our subclassing  function.
+Now let's repeat this process with the `new` keyword, it will require us to use binding rules to establish the original function object as the context object for our subclassing function.
+
+> the *this* in the `normalFridge.call(this ...)` will be the auto-created `this` object created by the `new` keyword in `myFancyFridge = new fancyFridge(...)`. We are using that `this` and passing in our fancyFridge's fancyName and fancyCost arguments to utilize the normalFridge's `this` assignments, but we are returning out the new fancyFridge `this` (automatically) when we instantiate it with `let myFancyFridge = new fancyFridge('iFridge', 5000);`
+
 ```
 function normalFridge(brand, cost) {
     this.brand = brand;
