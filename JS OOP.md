@@ -316,7 +316,7 @@ let myFancyFridge = new fancyFridge('iFridge', 5000);
 ```
 
 **ES6 (sugary) Class approach**
-> our base object
+> our base class
 
 ```
 class Vampire {
@@ -344,6 +344,8 @@ var person1 = new Vampire('Andre', 27);
 
 ```
 
+>let's extend (our subclass)
+
 ```
 class SpecialVampire extends Vampire {
     constructor(specialName, specialAge, glitter = false)   {
@@ -364,3 +366,16 @@ class SpecialVampire extends Vampire {
 
 var person2 = new SpecialVampire('Edward', 187);
 ```
+
+
+//Still under construction
+Things that **extend** **super** do:
+
+1. `extend` sets the `__proto__` link of SpecialVampire's `prototype` to the `prototype` of the Vampire function/object.
+2. `super` uses constructor function in Vampire, creates the object there, and then sets the `__proto__` 
+3. `extend` sets the `__proto__` linkage of SpecialVampire (not it's `prototype`) to Vampire allowing `super` to create an object inside of Vampire and carry it's own specialName and specialAge arguments. 
+4. `this` created by the `new` keyword in `var person2 = new SpecialVampire('Edward', 187);` is initialized, but assigned in Vampire and returned out. 
+
+
+
+
