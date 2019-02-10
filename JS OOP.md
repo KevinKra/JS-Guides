@@ -141,7 +141,7 @@ We created an **object** with the identifier `userFunctions`, this **object** co
 > So how does it actually link to the object we provided as an argument??
 
 `__proto__`, aka "dunder proto" (double underscore proto). 
->  alternate: `Object.getPrototypeOf()` since `__proto__` is a private variable and becoming phased out.
+>  alternate: `object.getPrototypeOf()` since `__proto__` is a private variable and becoming phased out.
 
 `__proto__` is the link that connects our instantiated objects to a shared reference point in memory. In this case we used the Object method `.create()` with an argument object type. This object serves as the (in this case explicitly) as the storage location for our shared functions.
 >This is great. We have a way to rapidly create objects and dynamically assign their key (property) value pairs. Additionally, we also have a solution for our performance issue: we have a nice tidy object that can house all of our functionality and every instanced object can reference the same object. 
@@ -171,6 +171,23 @@ let hobbit1 = new Hobbit('Frodo', 94, false);
 
 **Wait, so is this `this` like the other `this`?**
 Don't worry, this isn't confusing at all. Okay, maybe a little ... at first. There are two `this`'s in Javascript. There is a `this` object that is automatically created by the `new` keyword, assigned accordingly, and then garbage collected when the function completes its course. The second and more prevalent `this` is oriented around object binding, or context objects, as you'll see in a second.
+
+`this` as a context object using explicit binding rules.
+```
+let obj1 = {
+    score : 0,
+    increment : function() {
+        this.score++;
+    }
+}
+
+let obj2 = {
+    score: 15
+}
+
+obj1.increment.call(obj2);
+```
+
 
 > Also, what about that prototype thing you just mentioned?
 
@@ -245,7 +262,7 @@ const userFunctions = {
     logOut : function() {console.log("Beep boop logged out")}
 }
 
-//we then create a new factory function that creates more privledged objects than before.
+//we then create a new factory function that creates more privileged objects than before.
 function paidUser(paidName, paidScore, accountBalance) {
     const newUser = normalUser(paidName, paidScore);
     Object.setPrototypeOf(newUser, paidUserFunctions);
@@ -265,5 +282,33 @@ let a = normalUser('Kevin', 250);
 let b = paidUser('Toby', 550, 2500);
 ```
 
+Now let's repeat this process with the `new` keyword, it will require us to use binding rules to establish the original function object as the context object for our subclassing  function.
+```
+function normalFridge(brand, cost) {
+    this.brand = brand;
+    this.cost = cost;
+    this.on = false;
+}
 
+normalFridge.prototype.turnOn = function() {
+    return this.on? console.log(`Your ${this.brand} is already activated. ☜(꒡⌓꒡)`) : this.on = true;
+}
+
+
+function fancyFridge(fancyName, fancyCost, fancyMagnet) {
+    normalFridge.call(this, fancyName, fancyCost);
+    this.fancyMagnet = fancyMagnet;
+    this.totalMagnets = 1;
+}
+
+fancyFridge.prototype = Object.create(normalFridge.prototype);
+
+fancyFridge.prototype.brag = function() {
+    this.totalMagnets++;
+    console.log(`Yeah I have a fancy ${this.brand} and have um, ${this.totalMagnets} limited edition magnets.`);
+}
+
+let myFridge = new normalFridge('Lenovo', 500);
+let myFancyFridge = new fancyFridge('iFridge', 5000);
+```
 
