@@ -82,5 +82,26 @@ a.push(5)         // a = [1,2,3,5]
 
 ## Arrow => Functions
 
+Arrow functions allow developers to significantly decrease the amount of typing required write a function. Additionally, they also help resolve certain binding issues where the *this* context object would otherwise be lost.
+
+*ES5*
+```
+var addBy5 = function addBy5(number) {
+    return number + 5;
+}
+```
+
+*ES6*
+```
+const addBy5 = number => number + 5;
+```
+
+Few things to note:
+1 - arrow functions are *function expressions*.
+2 - if there is a single parameter, parenthesis not required.
+3 - No brackets no return (it implicitly returns)
+
+
+
 ## Destructuring
 
