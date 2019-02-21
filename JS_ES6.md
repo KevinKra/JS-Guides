@@ -1,11 +1,12 @@
 # ES6
 
 ## Let, Const, Var
-ES6 introduced a new form of scope known as **block-level scope** or *block scope*. Until the addition of block scope, the only way to isolate and contain variables in their own respective variable environments one had to create functions and wrap all the relevant data inside the function's body. However, there were still lingering issues that needed to be addressed.
+ES6 introduced a new form of scope known as **block-level scope** or *block scope*. Until the addition of block scope, the only way to isolate and contain variables in their own respective variable environments one had to create functions and wrap all the relevant data inside the function's body.
 
 **Block Scope**
 
-*ES5* 
+>*ES5* 
+
 ```
 function foo() {
     var i = 5;
@@ -16,7 +17,8 @@ function foo() {
 }
 ```
 
-*ES6 block scope*
+>*ES6 block scope*
+
 ```
 function foo() {
     var i = 5;
@@ -37,7 +39,8 @@ function foo() {
 
 > let's look at some examples
 
-*var*
+>*var*
+
 ```
 a //undefined
 var a = 5;
@@ -47,7 +50,8 @@ a = 15;
 a //?
 ```
 
-*let*
+>*let*
+
 ```
 a             //ReferenceError 'a' is not defined
 let a = 5;
@@ -57,7 +61,8 @@ a = 15;
 a //?
 ```
 
-*const*
+>*const*
+
 ```
 a             //ReferenceError 'a' is not defined (should say declared)
 const a = 5;
@@ -67,7 +72,8 @@ a = 15        //TypeError assignment to constant variable
 a //?
 ```
 
-*const pt.2*
+>*const pt.2*
+
 ```
 const a = [1,2,3]
 
@@ -84,14 +90,16 @@ a.push(5)         // a = [1,2,3,5]
 
 Arrow functions allow developers to significantly decrease the amount of typing required write a function. Additionally, they also help resolve certain binding issues where the *this* context object would otherwise be lost.
 
-*ES5*
+> *ES5*
+
 ```
 var addBy5 = function addBy5(number) {
     return number + 5;
 }
 ```
 
-*ES6*
+>*ES6*
+
 ```
 const addBy5 = number => number + 5;
 ```
@@ -104,14 +112,16 @@ Few things to note:
 >let's run through a few more interesting examples 
 
 **Two parameters**
-*ES5*
+>*ES5*
+
 ```
 var multiplyTwoNumbers = function(num1, num2) {
     return num1 * num2;
 }
 ```
 
-*ES6*
+>*ES6*
+
 ```
 const multiplyTwoNumbers = (num1, num2) => { return num1 * num2 }
 ```
@@ -132,5 +142,7 @@ const shareMyObject = () => ({apples : 'yum'});
 ```
 >Objects being returned require parentheses
 
-## Destructuring
+
+//under construction :metal:
+> Destructuring
 
