@@ -71,7 +71,7 @@ a //?
 ```
 const a = [1,2,3]
 
-const = a [5,6,7] //error
+const a = [5,6,7] //error
 
 ... but 
 
@@ -99,9 +99,38 @@ const addBy5 = number => number + 5;
 Few things to note:
 1 - arrow functions are *function expressions*.
 2 - if there is a single parameter, parenthesis not required.
-3 - No brackets no return (it implicitly returns)
+3 - No brackets no return statement needed (it implicitly returns)
 
+>let's run through a few more interesting examples 
 
+**Two parameters**
+*ES5*
+```
+var multiplyTwoNumbers = function(num1, num2) {
+    return num1 * num2;
+}
+```
+
+*ES6*
+```
+const multiplyTwoNumbers = (num1, num2) => { return num1 * num2 }
+```
+>brackets and return statement are optional here, but in a situation where you need multiple lines for your statements, brackets are required.
+
+**ES6 shorthand (no parameters)**
+```
+const sayHello = () => console.log("hello");
+
+// or even
+
+const sayHello = _ => console.log("hello");
+```
+
+**ES6 returning an Object literal**
+```
+const shareMyObject = () => ({apples : 'yum'});
+```
+>Objects being returned require parentheses
 
 ## Destructuring
 
